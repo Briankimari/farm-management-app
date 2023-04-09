@@ -1,0 +1,27 @@
+.dropDownProfile {
+  position:absolute;
+  top: 4rem;
+  right: 5.5rem;
+   padding: 15px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid orange;
+  color:black;
+  font-weight:800;
+  
+  
+
+  
+}
+.dropDownProfile::before{
+content:"";
+position:absolute;
+top: -0.7rem;
+right:1.1rem;
+width: 20px;
+height: 20px;
+transform: rotate(45deg);
+background-color: white;
+border-left: 1px solid orange;
+border-top: 1px solid orange;
+}

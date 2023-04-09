@@ -1,0 +1,83 @@
+  
+    //   {
+    //     topbarData.map(item=> (
+          
+    //       <ListItem
+          
+    //       sx={{marginTop:'18px',width:'9%',marginLeft:'86px',
+    //       marginRight:'-5%',cursor:'pointer',display:{xs:'inline-block'}}}
+    //       key={item.id}
+    //       onClick={()=>navigate(item.path)}
+    //       className={location.pathname===
+    //        item.path? classes.Active: classes.notActive}
+          
+    //       >
+               
+    //         <ListItemText >{item.title}</ListItemText>
+            
+    //       </ListItem>
+          
+    //     ))
+        
+    //   }
+
+
+    // leftbar
+    // {
+    //     LeftbarData.map(item=>(
+          
+    //         <ListItem 
+    //         sx={{cursor:'pointer'}}
+    //         key={item.id}
+    //         onClick={()=>navigate(item.path)}
+
+    //         >
+    //             <ListItemText>{item.title}</ListItemText>
+    //                 <ListItemIcon>{item.icon} </ListItemIcon>
+                
+    //         </ListItem>
+    //     ))
+    // }
+
+    //modal
+      document.addEventListener('DOMContentLoaded',()=>{
+// function to open and close modal
+function openModal($el) {
+  $el.classList.add('is-active');
+}
+function closeModal($el) {
+  $el.classList.remove('is-active');
+}
+function closeAllModal() {
+(document.querySelectorAll('.modal') || []).forEach(($modal)=> {
+  closeModal($modal);
+});
+
+}
+// button to open specific modal
+(document.querySelectorAll('.js-modal-trigger') || [].forEach(($trigger)=> {
+  const modal= $trigger.dataset.target;
+  const $target= document.getElementById(modal);
+
+  $trigger.addEventListener('click', () => {
+    openModal($target);
+  });
+}));
+// close parent modal
+(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close)=> {
+  const $target= $close.closest('.modal');
+
+  $close.addEventListener('click', ()=> {
+    closeModal($target);
+  });
+});
+// close all modal-keyboard event
+document.addEventListener('keydown', (event)=> {
+  const e= event || window.event;
+
+  if (e.keyCode ===27){
+  closeAllModal();
+  }
+});
+
+  });

@@ -1,0 +1,475 @@
+import React, { useEffect, useState } from 'react';
+import "./index.css";
+import CRUDTable, { Fields, Field, CreateForm, UpdateForm, DeleteForm, Pagination } from 'react-crud-table';
+import {TextField, Button,Typography, Paper} from "@mui/material"
+import useStyles from './Styles'
+import { useDispatch, useSelector } from 'react-redux';
+import { createPost,updatePost } from '../actions/posts';
+
+const DescriptionRenderer= ({field})=> <textarea {...field} />;
+
+let tasks = [
+
+
+];
+
+
+// sorting assets
+const SORTERS= {
+  NUMBER_ASCENDING: mapper => (a,b) => mapper(a) - mapper(b),
+  NUMBER_DESCENDING: mapper => (a,b) => mapper(b) - mapper(a),
+  STRING_ASCENDING: mapper => (a,b) => mapper(a).localeCompare(mapper(b)),
+  STRING_DESCENDING: mapper => (a,b) => mapper(b).localeCompare(mapper(a))
+
+};
+const getSorter= data => {
+  const mapper =x=> x[data.field];
+  let sorter = SORTERS.STRING_ASCENDING(mapper);
+
+  if (data.field === 'id') {
+    sorter = data.direction === 'ascending' ?
+    SORTERS.NUMBER_ASCENDING(mapper) : SORTERS.NUMBER_DESCENDING(mapper);
+
+  }else {
+    sorter = data.direction === 'ascending' ?
+    SORTERS.STRING_ASCENDING(mapper) : SORTERS.STRING_DESCENDING(mapper);
+  }
+  return sorter;
+};
+
+let count = tasks.length;
+const service= {
+  fetchItems: payload => {
+    let result = Array.from(tasks);
+    result= result.sort(getSorter(payload.sort));
+    return Promise.resolve(result);
+  },
+  
+  create: task => {
+    count +=1;
+    tasks.push({
+      ...task,
+      id: count,
+    });
+    return Promise.resolve(task);
+  },
+
+  update: data => {
+    const task = tasks.find(t => t.id === data.id);
+    task.Asset= data.Asset;
+    task.Value= data.Value;
+    task.Description= data.Description;
+    task.Date= data.Date;
+    return Promise.resolve(task);
+  },
+
+  delete: data => {
+    const task =tasks.find(t => t.id === data.id);
+    tasks = tasks.filter(t => t.id !== task.id);
+    return Promise.resolve(task);
+  },
+};
+
+const styles = {
+  container: { margin:'auto', width:'fit-container'},
+}
+
+
+const Assets = ({currentId, setCurrentId}) => {
+    const classes= useStyles();
+  const [postData, setPostData] =useState({
+asset:'',name:'',value:'',description:'',date:''
+  });
+  const post= useSelector((state)=> currentId ? state.posts.find((p)=> p._id === currentId): null);
+  const dispatch= useDispatch();
+
+   useEffect(()=> {
+    if(post) setPostData(post);
+  }, [post])
+
+  
+  const handleSubmit= (e)=>{
+    e.preventDefault();
+    
+    if(currentId) {
+      dispatch(updatePost(currentId,postData));  
+     
+    } else{
+       dispatch(createPost(postData));
+      
+    }
+
+  }
+
+
+
+  return (
+  
+    <div style={styles.container}>
+   
+   
+    <div>
+    <CRUDTable 
+    
+    caption="FARM ASSETS"
+    fetchItems={payload => service.fetchItems(payload)}>
+    <Fields>
+      <Field name="id" label="Id" hideInCreateForm readOnly />
+     <Field name='asset'  label='Asset(Type)' placeholder='Asset Type' variant='outlined' fullWidth value={postData.asset} required onChange={(e)=> setPostData({...postData,asset: e.target.value})}/>
+      <Field name='name' label='Asset Name' placeholder='Asset Name' variant='outlined' fullWidth value={postData.name} required onChange={(e)=> setPostData({...postData,name: e.target.value})} />
+      <Field name='value' label='Value(Ksh)' placeholder='Asset Value in Ksh'  variant='outlined' fullWidth value={postData.value} required onChange={(e)=> setPostData({...postData,value: e.target.value})}/>
+      <Field name='description' label='Description' render={DescriptionRenderer}  variant='outlined' fullWidth value={postData.description} required onChange={(e)=> setPostData({...postData,description: e.target.value})} />
+      <Field name='date' label='Date Of Purchase ' type='date' placeholder='Date Of Purchase' required  variant='outlined' fullWidth value={postData.date} onChange={(e)=> setPostData({...postData,date: e.target.value})} />
+      
+    </Fields>
+    <CreateForm title="Add Assets"
+     message="Add new Asset!"
+      trigger="Add Asset"
+       onSubmit={task => service.create(task)} 
+       submitText={<Button onSubmit={handleSubmit} type='submit'>Submit</Button>} type="submit"
+       
+   />
+
+
+    <UpdateForm title='Update Asset'
+     message='Update Asset'
+      trigger='update'
+       onSubmit={task => service.update(task)}
+        submitText='Update'
+   
+ />
+     
+<DeleteForm 
+title='Delete Asset'
+message='Are you sure you want to delete?'
+trigger='Delete'
+onSubmit={task => service.delete(task)}
+submitText='Delete'
+validate={(values)=> {
+  const errors={};
+   if (!values.id) {
+        errors.id = 'provide an id';
+      }
+      return errors;
+}}
+
+/>    
+        <Pagination itemsPerPage={2} fetchItems={payload =>service.fetchItems(payload)}/>
+
+    </CRUDTable>
+      </div>
+    </div>
+  )
+};
+//using formik
+
+import React, { useState } from 'react';
+import { Box, Button, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import EditOutlineIcon from "@mui/icons-material/EditOutlined";
+import { Formik} from "formik";
+import * as yup from "yup";
+import { useNavigate} from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../../state';
+import Dropzone from "react-dropzone";
+import FlexBetween from '../../FlexBetween';
+import { GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google"
+import { TopbarStyle } from '../../../bars/topbar/TopbarStyle';
+import { toast } from "react-toastify";
+import { registerUser,validateEmail } from "../../../services/authService"
+import {SET_LOGIN,SET_NAME} from "../../../pages/redux/features/auth/authSlice"
+import Loader from "../../loader/Loader"
+
+
+
+
+const registerSchema= yup.object().shape({
+    firstName: yup.string().required("required"),
+    lastName: yup.string().required("required"),
+    email: yup.string().email("invalid email").required("required"),
+    password: yup.string().required("required"),
+    farmName: yup.string().required("required"),
+    profile: yup.string().required("required"),
+})
+
+const loginSchema= yup.object().shape({
+   email: yup.string().email("invalid email").required("required"),
+   password: yup.string().required("required"),
+})
+
+const initialValuesRegister = {
+    firstName: "",
+    lastName: "",
+    email:"",
+    password: "",
+    password2:""
+   
+     
+}
+
+
+const initialValuesLogin = {
+     email:"",
+     password: "",
+   
+}
+
+const Form = () => {
+const [pageType, setPageType]= useState("login");
+const { palette} = useTheme();
+const classes = TopbarStyle();
+const dispatch= useDispatch();
+const navigate= useNavigate();
+const isNonMobile = useMediaQuery("(min-width:600px)");
+const isLogin = pageType === "login";
+const isRegister = pageType === "register";
+const [isLoading,setIsLoading] = useState(false);
+const [formData, setformData]= useState(initialValuesRegister);
+const {firstName,lastName,email,password,password2} = formData;
+
+
+   const handleInputChange =(e) => {
+    const {name,value} = e.target;
+    setformData({ ...formData, [name]: value});
+   } 
+
+   const register = async (e) => {
+    // e.preventDefault();
+
+    if(!firstName || !lastName || !email || !password) {
+        return toast.error("All fields are required");
+
+    };
+    if (password.length < 6) {
+        return toast.error("Password too short,Please input more than 6 characters");
+    };
+    if (!validateEmail(email)) {
+        return toast.error("Please enter a valid email");
+    };
+    if (password !== password2) {
+        return toast.error("Password does not match");
+    };
+    const userData= {
+        firstName,
+        lastName,
+        email,
+        password,
+    };
+    setIsLoading(true);
+        try {
+            const data = await registerUser(userData);
+            await dispatch(SET_LOGIN(true));
+            await dispatch(SET_NAME(data.name));
+            navigate("/farm");
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+        }
+
+  
+};
+
+const login = async (values,onSubmitProps) => {
+     const loggedInResponse = await fetch("http://localhost:5000/api/users/login",
+    {
+        method:'POST',
+        headers: { "Content-type": "application/json"},
+        body:JSON.stringify(values),
+    }
+    );
+    const loggedIn = await loggedInResponse.json();
+    onSubmitProps.resetForm();
+    if(loggedIn) {
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token:loggedIn.token,
+          })
+          
+        );
+        navigate('/farm')
+    }
+}
+
+const googleSuccess = async (res)=>{
+const result= res?.profileObj;
+const token= res?.tokenId;
+
+try {
+    dispatch({type: 'AUTH',data:{result,token}}); 
+
+     navigate('/')
+} catch (error) {
+    console.log(error);
+}
+}
+const googleFailure=(error)=>{
+   
+    console.log("Google Sign In was unsuccessful.Try Registering using user data");
+}
+    
+    return (
+        <div>
+        {isLoading && <Loader />}
+    <Formik onSubmit={register} >
+    {({
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+        resetForm,
+    }) => (
+        <form onSubmit={handleSubmit}>
+            <Box display="grid"
+            gap="30px"
+            gridTemplateColumns="repeat(4,minmax(0,1fr))"
+            sx={{
+                "& > div":{gridColumn: isNonMobile ? undefined : 'span 4'}
+            }}>
+           
+                <>
+                    <TextField label="First Name"
+                    onBlur={handleBlur}
+                    onChange={handleInputChange}
+                    name='firstName'
+                    value={firstName}
+                    error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                    helperText={touched.firstName && errors.firstName}
+                    sx={{gridColumn:'span 2'}}
+                    />
+
+                      <TextField label="Last Name"
+                    onBlur={handleBlur}
+                    onChange={handleInputChange}
+                    name='lastName'
+                    value={lastName}
+                    error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                    helperText={touched.lastName && errors.lastName}
+                    sx={{gridColumn:'span 2'}}
+                    />
+
+                    {/* <TextField label=" Set Farm Name"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    name='farmName'
+                    value={farmName}
+                    error={Boolean(touched.farmName) && Boolean(errors.farmName)}
+                    helperText={touched.farmName && errors.farmName}
+                    sx={{gridColumn:'span 4'}}
+                    /> */}
+                    {/* <Box gridColumn="span 4"
+                    border={`1px solid ${palette.neutral.medium} `}
+                    borderRadius='5px' p='1rem'>
+                        <Dropzone acceptedFiles=".jpg,.jpeg,.png"
+                        multiple={false} onDrop={(acceptedFiles)=> setFieldValue("profile",acceptedFiles[0])}>
+
+                        {({getRootProps, getInputProps})=> (
+                            <Box 
+                            {...getRootProps()}
+                            border={`2px dashed ${palette.primary.main}`}
+                            p="1rem"
+                            sx={{"&:hover": {cursor:'pointer'}}}
+                            >
+                               <input {...getInputProps()}/>
+                               {!values.profile ? (
+                                <div>Add picture Here</div>
+                               ): (
+                                <FlexBetween>
+                                <Typography>{values.profile.name}</Typography>
+                                    <EditOutlineIcon/>
+                                </FlexBetween>
+                               )}
+                            </Box>
+                        )}
+                         
+                        </Dropzone>
+                    
+                    </Box> */}
+                </>
+        
+            <TextField label="Email"
+            type="email"
+            onBlur={handleBlur}
+            onChange={handleInputChange}
+            name='email'
+            value={email}
+            error={Boolean(touched.email) && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+            sx={{gridColumn:'span 4'}}
+            />
+
+            <TextField label="Password"
+            type='password'
+            onBlur={handleBlur}
+            onChange={handleInputChange}
+            name='password'
+            value={password}
+            error={Boolean(touched.password) && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
+            sx={{gridColumn:'span 4'}}
+            />
+            </Box>
+        
+            <Box>
+            <Button 
+            fullWidth
+            type="submit"
+            sx={{ m: "2rem 0",p:"1rem", backgroundColor:palette.primary.main,color:palette.background.alt, "&:hover":{color: palette.primary.main}
+            }}>
+            {isLogin ? "LOGIN" : "REGISTER"}
+            </Button>
+              <Button
+            fullWidth
+            sx={{  m: "2rem 0",p:"1rem", backgroundColor:palette.primary.main,
+            color:palette.background.alt, "&:hover":{color: palette.primary.main}  }}
+           
+           variant="contained"
+            >
+            <GoogleOAuthProvider
+             onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy="single_host_origin"
+              clientId="638720293404-g6t6kh5ta8najtls75e73r3m5vopv0tm.apps.googleusercontent.com"
+            >
+            <GoogleLogin  
+                  onSuccess={googleSuccess}
+                onFailure={googleFailure}
+                cookiePolicy="single_host_origin"
+                />
+                </GoogleOAuthProvider>
+                  </Button>
+            <Typography onClick={()=> {
+            setPageType(isLogin ? "register" : "login");
+             resetForm();
+            }}
+            sx={{
+                textDecoration:'underline',color:palette.primary.main,
+                "&:hover":{
+                    cursor: "pointer",
+                    color: palette.primary.light,
+
+                }
+            }}>
+            {isLogin ? "Don't have an account? Sign up here."
+             :   "Already have an account? Login here."}
+            </Typography>
+            </Box>
+
+        </form>
+    )}
+    
+    </Formik>
+    </div>
+  );
+}
+
+export default Form;
+
+
+
+
+
+export default Assets;
