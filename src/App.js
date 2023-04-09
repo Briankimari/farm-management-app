@@ -32,7 +32,7 @@ import EditProfile from "./pages/userProfile/EditProfile";
 import AddProfile from "./pages/userProfile/AddProfile";
 import Profiles from "./bars/topbar/profile/Profiles";
 
-// axios.defaults.withCredentials= true;
+
 
 
 function App() {

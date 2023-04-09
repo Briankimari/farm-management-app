@@ -19,19 +19,19 @@ function DashBoard() {
 
    
    const getIncome= async () => {
-    const response= await axios.get('http://localhost:5000/get-incomes');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-incomes');
     setIncome(response.data); 
     console.log(response.data);
    }
 
     const getExpense= async () => {
-    const response= await axios.get('http://localhost:5000/get-expenses');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-expenses');
     setExpense(response.data); 
     console.log(response.data);
    }
 
    const getLiability= async () => {
-    const response= await axios.get('http://localhost:5000/get-liability');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-liability');
     setLiability(response.data); 
     console.log(response.data);
    } 

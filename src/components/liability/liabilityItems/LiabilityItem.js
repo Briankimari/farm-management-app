@@ -51,14 +51,14 @@ const [liabilities, setLiability] = useState([]);
     getLiability();
    }, []);
  const getLiability= async () => {
-    const response= await axios.get('http://localhost:5000/get-liability');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-liability');
     setLiability(response.data); 
     console.log(response.data);
    }
         // delete income
         const deleteLiability= async (id)=> {
             try {
-                await axios.delete(`http://localhost:5000/delete-liability/${id}`);
+                await axios.delete(`https://farm-management-api.onrender.com/delete-liability/${id}`);
                 getLiability();
             } catch (error) {
                  console.log(error);

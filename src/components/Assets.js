@@ -17,7 +17,7 @@ const Assets = () => {
  }, []);
 // get assets
  const getAssets = async () => {
-  const response = await axios.get('http://localhost:5000/assets');
+  const response = await axios.get('https://farm-management-api.onrender.com/assets');
   setAsset(response.data);
  };
 
@@ -25,7 +25,7 @@ const Assets = () => {
 const deleteAsset = async (id) => {
   setIsLoading(true)
   try {
-    await axios.delete(`http://localhost:5000/assets/${id}`);
+    await axios.delete(`https://farm-management-api.onrender.com/assets/${id}`);
     getAssets();
     toast.success("Asset deleted successfuly")
     setIsLoading(false)

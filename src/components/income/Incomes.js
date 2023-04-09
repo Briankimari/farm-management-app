@@ -13,7 +13,7 @@ function Incomes() {
    }, []);
 
    const getIncome= async () => {
-    const response= await axios.get('http://localhost:5000/get-incomes');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-incomes');
     setIncome(response.data); 
     console.log(response.data);
    }

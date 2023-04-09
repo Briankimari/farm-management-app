@@ -13,7 +13,7 @@ function Liability() {
    }, []);
 
    const getLiability= async () => {
-    const response= await axios.get ('http://localhost:5000/get-liability');
+    const response= await axios.get ('https://farm-management-api.onrender.com/get-liability');
     setLiability(response.data); 
    console.log(response.data);
    } 

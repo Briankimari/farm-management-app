@@ -51,14 +51,14 @@ function IncomeItem({id,amount,title,date,category,description,deleteItem,indica
         }, []);
         // get
 const getIncome= async () => {
-    const response= await axios.get('http://localhost:5000/get-incomes');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-incomes');
     setIncome(response.data); 
     console.log(response.data);
    }
         // delete income
         const deleteIncome= async (id)=> {
             try {
-                await axios.delete(`http://localhost:5000/delete-income/${id}`);
+                await axios.delete(`https://farm-management-api.onrender.com/delete-income/${id}`);
                 getIncome();
             } catch (error) {
                  console.log(error);

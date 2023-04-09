@@ -20,7 +20,7 @@ const AddAsset = () => {
         e.preventDefault();
         setIsLoading(true)
         try {
-          await axios.post('http://localhost:5000/assets',{
+          await axios.post('https://farm-management-api.onrender.com/assets',{
             asset,name,value,description,date
           });
           toast.success("Asset added successfuly")

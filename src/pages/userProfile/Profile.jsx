@@ -27,7 +27,7 @@ const Profile = () => {
 
 // get user 
 const getProfile= async()=>{
-  const response= await axios.get('http://localhost:5000/profile');
+  const response= await axios.get('https://farm-management-api.onrender.com/profile');
   setProfiles(response.data);
   
 };
@@ -37,7 +37,7 @@ const getProfile= async()=>{
 const deleteProfile = async (id) => {
   setIsLoading(true)
   try {
-    await axios.delete(`http://localhost:5000/profile/${id}`);
+    await axios.delete(`https://farm-management-api.onrender.com/profile/${id}`);
     toast.success("Account Deleted Successfuly")
     getProfile();
   } catch (error) {
@@ -49,14 +49,14 @@ const deleteProfile = async (id) => {
 
 // get image
 const getImages =async () => {
-  const response = await axios.get('http://localhost:5000/uploads');
+  const response = await axios.get('https://farm-management-api.onrender.com/uploads');
   setPostImage(response.data);
 }
 // remove profile image
 const removeProfile = async (id)=> {
   
   try {
-    await axios.delete(`http://localhost:5000/uploads-delete/${id}`);
+    await axios.delete(`https://farm-management-api.onrender.com/uploads-delete/${id}`);
     toast.success("Photo removed successfuly")
     getProfile()
   } catch (error) {

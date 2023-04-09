@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiFillFileAdd, AiOutlineFolderView, AiOutlineFundView, AiTwotoneFileImage } from 'react-icons/ai';
+import {  AiTwotoneFileImage } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 const Child = (open,close) => {

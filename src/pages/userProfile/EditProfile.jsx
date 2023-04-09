@@ -29,7 +29,7 @@ useEffect(()=> {
 
   
 const getProfileById= async () => {
-    const response = await axios.get(`http://localhost:5000/profile/${id}`);
+    const response = await axios.get(`https://farm-management-api.onrender.com/profile/${id}`);
     setFirstName( response.data.firstName);
     setLastName( response.data.lastName);
     setEmail( response.data.email);
@@ -44,7 +44,7 @@ const getProfileById= async () => {
 const updateProfile = async (e) => {
     e.preventDefault();
     try {
-        await axios.patch(`http://localhost:5000/profile/${id}`, {
+        await axios.patch(`https://farm-management-api.onrender.com/profile/${id}`, {
             firstName,lastName,profile,farmName,bio,email
         });
         navigate('/profile');

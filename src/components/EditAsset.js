@@ -22,7 +22,7 @@ useEffect(()=> {
 },[]);
 
 const getAssetById= async () => {
-    const response = await axios.get(`http://localhost:5000/assets/${id}`);
+    const response = await axios.get(`https://farm-management-api.onrender.com/assets/${id}`);
     setAsset( response.data.asset);
     setName( response.data.name);
     setValue( response.data.value);
@@ -34,7 +34,7 @@ const updateAsset = async (e) => {
     e.preventDefault();
     setIsLoading(true)
     try {
-        await axios.patch(`http://localhost:5000/assets/${id}`, {
+        await axios.patch(`https://farm-management-api.onrender.com/assets/${id}`, {
              asset,name,value,description,date
         });
         toast.success("Asset Updated Successfuly")

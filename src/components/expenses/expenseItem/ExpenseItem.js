@@ -59,14 +59,14 @@ function ExpenseItem({id,amount,title,date,category,description,deleteItem,indic
         }, []);
         // get
 const getExpense= async () => {
-    const response= await axios.get('http://localhost:5000/get-expenses');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-expenses');
     
     console.log(response.data);
    }
         // delete income
         const deleteExpense= async (id)=> {
             try {
-                await axios.delete(`http://localhost:5000/delete-expenses/${id}`);
+                await axios.delete(`https://farm-management-api.onrender.com/delete-expenses/${id}`);
                 getExpense();
             } catch (error) {
                 console.log(error);

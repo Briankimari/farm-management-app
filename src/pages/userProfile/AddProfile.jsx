@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import FileBase from 'react-file-base64'
-import { useSelector } from "react-redux";
-import { useNavigate, useParams,  } from 'react-router-dom';
+import React, {  useState } from "react";
+
+import { useNavigate,   } from 'react-router-dom';
 import Layout from '../../layout/Layout';
 import "./Profile.scss";
-import { selectUser } from "../redux/features/auth/authSlice";
+
 import Loader from '../../components/loader/Loader';
 import { Box, Button, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
 import axios from "axios";
 import { toast } from "react-toastify";
-import Profile from "./Profile";
+
 
 
 
@@ -32,7 +31,7 @@ const [profileImg,setProfile] = useState({ myImage:''});
 const  createPost = async (newImage) =>{
   setIsLoading(true)
   try {
-     await axios.post('http://localhost:5000/uploads',newImage)
+     await axios.post('https://farm-management-api.onrender.com/uploads',newImage)
      toast.success("Image Uplaoded")
   } catch (error) {
       console.log(error);
@@ -47,7 +46,7 @@ const saveProfile= async (e) => {
     console.log("uploaded");
     try {
      
-           await axios.post('http://localhost:5000/profile',{
+           await axios.post('https://farm-management-api.onrender.com/profile',{
             firstName,lastName,email,bio,farmName,profileImg
         });
         

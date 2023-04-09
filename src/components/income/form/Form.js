@@ -19,7 +19,7 @@ function Form() {
        
         
         try {
-          await axios.post('http://localhost:5000/incomes',{
+          await axios.post('https://farm-management-api.onrender.com/incomes',{
           title,amount,date,category,description
            });
           navigate('/')

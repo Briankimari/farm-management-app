@@ -24,7 +24,7 @@ const LivestockSide = ({ setChildId}) => {
  
 // get assets
  const getdoctors = async () => {
-  const response = await axios.get('http://localhost:5000/doctors');
+  const response = await axios.get('https://farm-management-api.onrender.com/doctors');
   setDoctor(response.data);
  };
 

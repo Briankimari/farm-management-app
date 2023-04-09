@@ -14,7 +14,7 @@ export const registerUser = async (userData) => {
   try {
     const response = await 
     axios.post(
-      'http://localhost:5000/api/users/register',
+      'https://farm-management-api.onrender.com/api/users/register',
       userData,
       // { withCredentials: true }
     );
@@ -35,7 +35,7 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
   try {
     const response = await axios.post(
-      'http://localhost:5000/api/users/login',
+      'https://farm-management-api.onrender.com/api/users/login',
       userData
     );
     if (response.statusText === "OK") {
@@ -57,7 +57,7 @@ export const loginUser = async (userData) => {
 // Get Login Status
 export const getLoginStatus = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/api/users/loggedin');
+    const response = await axios.get('https://farm-management-api.onrender.com/api/users/loggedin');
     return response.data;
   } catch (error) {
     const message =
@@ -70,7 +70,7 @@ export const getLoginStatus = async () => {
 // // Get User Profile
 export const getUser = async () => {
    try {
-    const response = await axios.get('http://localhost:5000/api/users/getuser');
+    const response = await axios.get('https://farm-management-api.onrender.com/api/users/getuser');
     return response.data;
    } catch (error) {
      const message =
@@ -84,7 +84,7 @@ export const getUser = async () => {
 export const updateUser = async (formData) => {
   try {
     const response = await axios.patch(
-      'http://localhost:5000/api/users/updateuser',
+      'https://farm-management-api.onrender.com/api/users/updateuser',
       formData
     );
     return response.data;

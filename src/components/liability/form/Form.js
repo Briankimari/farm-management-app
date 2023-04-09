@@ -19,7 +19,7 @@ function Form() {
        
         
         try {
-          await axios.post('http://localhost:5000/add-liability',{
+          await axios.post('https://farm-management-api.onrender.com/add-liability',{
           title,amount,date,category,description
            });
           navigate('/')

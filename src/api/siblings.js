@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url= "http://localhost:5000/siblings";
+const url= "https://farm-management-api.onrender.com/siblings";
 
 
 export const fetchPosts =() => axios.get(url);

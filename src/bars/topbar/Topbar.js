@@ -131,14 +131,14 @@ export default function MiniDrawer() {
     },[]);
 // get user 
 const getProfile= async()=>{
-  const response= await axios.get('http://localhost:5000/profile');
+  const response= await axios.get('https://farm-management-api.onrender.com/profile');
   setProfiles(response.data);
   
 };
 
 // get image
 const getImages =async () => {
-  const response = await axios.get('http://localhost:5000/uploads');
+  const response = await axios.get('https://farm-management-api.onrender.com/uploads');
   setPostImage(response.data);
 }
 

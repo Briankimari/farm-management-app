@@ -45,7 +45,7 @@ const {firstName,lastName,email,password,password2} = formData;
    const register = async (e) => {
     e.preventDefault();
      try {
-        await axios.post('http://localhost:5000/api/users/register',{
+        await axios.post('https://farm-management-api.onrender.com/api/users/register',{
             firstName,lastName,email,password
         });
         navigate('/')

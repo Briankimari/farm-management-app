@@ -20,12 +20,12 @@ const ProfitLoss = () => {
 
 // get assets
  const getAssets = async () => {
-  const response = await axios.get('http://localhost:5000/assets');
+  const response = await axios.get('https://farm-management-api.onrender.com/assets');
   setAsset(response.data);
  };
 //  get liability
    const getLiability= async () => {
-    const response= await axios.get('http://localhost:5000/get-liability');
+    const response= await axios.get('https://farm-management-api.onrender.com/get-liability');
     setLiability(response.data); 
     console.log(response.data);
    } 

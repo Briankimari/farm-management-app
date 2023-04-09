@@ -20,7 +20,7 @@ console.log(posts);
 
 // get siblings
 const getSiblings=async()=> {
-    const response=await axios.get('http://localhost:5000/siblings');
+    const response=await axios.get('https://farm-management-api.onrender.com/siblings');
     setSibling(response.data);
 };
 

@@ -17,7 +17,7 @@ const Vertinary = ({open,onClose}) => {
      const saveDoctor =async (e)=> {
       e.preventDefault();
        try {
-          await axios.post('http://localhost:5000/doctors',{
+          await axios.post('https://farm-management-api.onrender.com/doctors',{
             doctor,dueDate,description,event,question
           });
           navigate('/livestockside')
