@@ -37,9 +37,14 @@ const Homepage = () => {
           Use the buttons below to sign in or sign up Farm App.
           </p> 
            <div className='btn-box'>
-                    <a href='/register' className='btn btn-10'>Register</a>
-                    <a href="/login" className='btn btn-11'>Login</a>
+            <Link to='/register'>
+               <a  className='btn btn-10'>Register</a>
+            </Link>
+                 <Link to="/login">
+                  <a className='btn btn-11'>Login</a>
 
+                 </Link>
+                   
                 </div>
        
         </Box>

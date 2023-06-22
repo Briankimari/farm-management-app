@@ -60,8 +60,9 @@ function App() {
 
  <ToastContainer/>
           <Routes>
-              <Route path="/" element={<Homepage/>} /> 
-              <Route exact path="farm" element= { <Farm />} />
+             
+              <Route exact path="/" element= { <Homepage/>} />
+              <Route path="farm" element={<Farm/>} /> 
               <Route path="assets" element= { <Assets />} />
               <Route path="livestock" element= { <Livestock />} />
               <Route path="assetscapital" element= { <AssetsCapital/>} />
