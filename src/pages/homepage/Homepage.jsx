@@ -18,7 +18,7 @@ const Homepage = () => {
 
         <div className='head-2' >
        <a className='und' href="/">Home</a>
-       <a >About</a>
+       <a >Abouts</a>
        <a className='und-1' ><BrightnessMediumTwoTone fontSize='80'/></a>
         
         </div>
