@@ -102,7 +102,7 @@ const login = async (e) => {
             }}>
                     LOGIN
             </Button>
-                <Link to="/homepage">
+                <Link to="/register">
                 <Typography 
                     
                       sx={{

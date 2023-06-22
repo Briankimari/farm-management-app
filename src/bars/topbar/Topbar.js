@@ -211,7 +211,7 @@ const getImages =async () => {
            sx={{ml:'0.5rem',fontSize:'1.2rem',fontWeight:'bolder'}} 
             className="is-underlined is-family-sans-serif --farm  "variant='h6'>
                    {user.farmName} 
-                   <Link to="/homepage" style={{textDecoration:'none',marginLeft:'1rem'}}  >
+                   <Link to="/" style={{textDecoration:'none',marginLeft:'1rem'}}  >
               <Tooltip title={<span style={{color:'lightblue'}}>Logout</span>} >
           <LogoutIcon color='white' />
            </Tooltip>            

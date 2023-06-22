@@ -6,14 +6,15 @@ import Form from './Form';
 import Posts from './Posts';
 import HomeIcon from '@mui/icons-material/Home';
 
-
+ 
 
 const Siblings = () => {
    const classes= useStyles();
   return (
-    <div className='container'>
+    <div className='header-sibling'>
+    <div className=' h1-1'>
       <Link to='/livestockside' style={{textDecoration:'none',marginBottom:'20%'}}>
-        <button className='button is-primary --my '><HomeIcon/></button>
+        <button style={{marginLeft:'20px'}} className='button is-primary --my '><HomeIcon/></button>
       </Link>
       <div>
        <Grow in>
@@ -23,7 +24,9 @@ const Siblings = () => {
        <Posts/>
        </Grid>
        
-        <Grid  item xs={12} sm={4}>
+        <Grid  item xs={12} sm={4} style={{
+          marginTop:'35px'
+        }}>
       <Form/>
        </Grid>
      </Grid>
@@ -31,6 +34,7 @@ const Siblings = () => {
  </Grow>
   
       </div>
+    </div>
     </div>
   ); 
 }

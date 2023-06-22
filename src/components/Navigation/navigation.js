@@ -69,16 +69,17 @@ const getImages =async () => {
 
 const NavStyled= styled.nav`
 padding:1rem 1rem;
-width:250px;
-height:80vh;
+width:300px;
+height:105vh;
 background: rgba(252, 246,249,0.78);
 border: 3px solid #fffff;
 backdrop-filter:blur(4.5px);
-border-radius: 32px;
+border-radius: 30px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 gap:1rem;
+margin-right:2rem;
 
 
 .user-con{

@@ -51,6 +51,12 @@ section {
   width: 100%;
   padding: 4rem 0;
 }
+.header-sibling{
+  width: 100%;
+  background: rgb(66, 3, 75);
+  height: 8vh;
+}
+
 
 .container {
   max-width: 1000px;

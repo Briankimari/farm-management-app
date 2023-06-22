@@ -14,13 +14,13 @@ import styled from '@emotion/styled';
  `;
 const Structure = () => (
            
-    <Box className='--center-all  '>
+    <Box className='--center-all  ' >
     <div className=' --center-all --text-sm --inline-block '>
     <Link to='/livestockside' className='btn btn-success'><AiFillBackward/></Link>
     <p className='help --color-primary --fw-bold --text-p'>click to view each parent/child family</p>
     
     
-    <div className='--text-sm --fw-bold parent --mt --my '>
+    <div className='--text-sm --fw-bold parent --mt --my  ' >
        <Tree 
        lineWidth={'2px'}
        lineColor={'green'}

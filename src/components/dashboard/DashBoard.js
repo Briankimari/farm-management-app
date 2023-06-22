@@ -69,13 +69,13 @@ const totalLiability =()=> {
     console.log('total',totalIncome());
   return (
    
-    <DashboardStyled className='row'>
+    <DashboardStyled className=''>
      
     <h1> All Farm Transactions</h1>
-    <div className='stats-con column'>
-      <div className='chart-con column'>
+    <div className='stats-con '>
+      <div className='chart-con '>
         <Chart/>
-        <div className='amount-con column'>
+        <div className='amount-con '>
           <div className='income'>
             Total Income
             <p>
@@ -83,7 +83,7 @@ const totalLiability =()=> {
             
             </p>
           </div>
-          <div className='expenses column'>
+          <div className='expenses '>
             Total Expenditure
             <p>
              {money} {totalExpense()}
@@ -91,7 +91,7 @@ const totalLiability =()=> {
             </p>
           </div>
 
-           <div className='income column'>
+           <div className='income'>
             Total Liability
             <p>
              {money} {totalLiability()}
@@ -99,7 +99,7 @@ const totalLiability =()=> {
             </p>
           </div>
 
-          <div className='balance column'>
+          <div className='balance '>
           <h2>Tatal Balance</h2>
            <p>
              {money} {fullBalance()}
@@ -108,7 +108,7 @@ const totalLiability =()=> {
           </div>
         </div>
         </div>
-        <div className='history-con column'>
+        <div className='history-con '>
           <History/>
                    
         </div>
@@ -122,11 +122,11 @@ const DashboardStyled= styled.div`
 }
 .stats-con {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
     .chart-con{
       grid-column: 1 / 4;
-      height: 400px;
+      height: 40vh;
         .amount-con{
           display: grid;
           grid-template-columns:repeat(4, 1fr);

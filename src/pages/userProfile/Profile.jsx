@@ -46,7 +46,7 @@ const deleteProfile = async (id) => {
     toast.error("error while deleting..!!,try deleting again")
   }
 };
-
+ 
 // get image
 const getImages =async () => {
   const response = await axios.get('https://farm-management-api.onrender.com/uploads');
@@ -104,8 +104,8 @@ sx={{"& > div":{gridColumn: isNonMobile ? undefined : 'span 6'}}}>
    </p>
   <div className='panel-block'>
   {postImage.map((get)=>(
-<figure style={{}} className='image is-256x256'>
-   <img className='is-rounded is-large'  width="640" height="360" src={get.myImage} alt=' User Profile' allowFullScreen/>
+<figure style={{}} className='image '>
+   <img style={{borderRadius:'15px',width:'70%',marginLeft:"35%"}}   src={get.myImage} alt=' User Profile' allowFullScreen/>
   <Button className='button is small is-danger' onClick={()=> removeProfile(get._id)}>
 <Tooltip title={<span style={{color:'lightblue'}}>Delete Profile Image</span>}>
  <DeleteForevorIcon /> 

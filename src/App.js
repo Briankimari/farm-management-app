@@ -3,7 +3,7 @@ import Farm from "./components/Farm";
 import Livestock from "./components/Livestock";
 import ProfitLoss from "./pages/ProfitLoss";
 import Summary from "./pages/Summary";
-import { BrowserRouter , Route, Routes} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import {  CssBaseline, ThemeProvider} from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useEffect, useMemo } from "react";
@@ -31,6 +31,7 @@ import Profile from "./pages/userProfile/Profile";
 import EditProfile from "./pages/userProfile/EditProfile";
 import AddProfile from "./pages/userProfile/AddProfile";
 import Profiles from "./bars/topbar/profile/Profiles";
+import Homepage from "./pages/homepage/Homepage";
 
 
 
@@ -59,22 +60,22 @@ function App() {
 
  <ToastContainer/>
           <Routes>
-      
-              <Route exact path="/farm" element= { <Farm />} />
+              <Route path="/" element={<Homepage/>} /> 
+              <Route exact path="farm" element= { <Farm />} />
               <Route path="assets" element= { <Assets />} />
               <Route path="livestock" element= { <Livestock />} />
               <Route path="assetscapital" element= { <AssetsCapital/>} />
               <Route path="livestockside" element= { <PostLivestock />} />
               <Route path="profitloss" element= { <ProfitLoss />} />
-             <Route path="/farm" element= { <Summary />} />
+             <Route path="farm" element= { <Summary />} />
              <Route path="add" element= { <AddAsset />} />
              <Route path="edit/:id" element= { <EditAsset />} />
             <Route path="doctor" element= { <Vertinary />} />
             <Route path="box" element= { <Box />} />
             <Route path="structure" element= { <Structure />} />
             <Route path="siblings" element= { <Siblings />} />
-             <Route path="homepage" element= { <Login/>} />
-             <Route path="/" element= { <Logins/>} />
+             <Route path="register" element= { <Login/>} />
+             <Route path="login" element= { <Logins/>} />
              <Route path="profile" element= { <Profile/>} />
               <Route path="profiles" element= { <Profiles/>} />
              <Route path="editprofile" element= { <EditProfile/>} />

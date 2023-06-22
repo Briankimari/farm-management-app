@@ -48,7 +48,7 @@ const {firstName,lastName,email,password,password2} = formData;
         await axios.post('https://farm-management-api.onrender.com/api/users/register',{
             firstName,lastName,email,password
         });
-        navigate('/')
+        navigate('login')
      } catch (error) {
         
      }

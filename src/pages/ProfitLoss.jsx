@@ -77,9 +77,9 @@ const totalLiability =()=> {
   return (
     <Layout>
     
-    <section className="row" >
+    <section className="row "   >
       
-     <article className='panel is-warning column' >
+     <article className='panel is-warning column' style={{marginLeft:'2rem'}} >
       <p className='panel-heading' style={{color:'white'}}>Calculated Farm's Profit </p>
       <p className='panel-tabs'>
      <Link style={{textDecoration:'none'}}>Assets</Link>
@@ -95,7 +95,7 @@ const totalLiability =()=> {
         </p> 
 
         </div>
-        <div className='panel-block'>
+        <div className='panel-block' >
           <p>
                 <span style={{display:'flex'}}>
                  Total Incomes
@@ -189,10 +189,10 @@ const totalLiability =()=> {
      </article>
      </div>
 
-     <div className='column'>
+     <div className='column' >
       <Profit/>
      </div>
-<div className='box colum'>
+<div className='box colum' style={{marginLeft:'2rem'}}>
 <h2 className='earning-title '>Min <span>Income</span>Max</h2>
           <div className='salary-item column'>
           <p>

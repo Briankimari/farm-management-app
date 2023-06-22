@@ -2,7 +2,6 @@
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import Navigation from './Navigation/navigation';
-import { Grid } from '@mui/material';
 import DashBoard from './dashboard/DashBoard';
 import Incomes from './income/Incomes';
 import Expense from './expenses/Expense';
@@ -37,7 +36,7 @@ switch(active) {
   
   return (
     <Layout>
-    <div style={{flex:1,flexDirection:'row',display:'flex',width:'1350px'}} >
+    <div style={{flex:1,flexDirection:'row',display:'flex',width:'1750px',height:'100vh'}} >
     <div >
       <section >
            
@@ -67,6 +66,7 @@ switch(active) {
  background:rgba(252,246,249,0.78);
  border:3px solid #ffffff;
  backdrop-filter:blur(4.5px);
+ height:100vh;
 
  overflow-x:hidden;
  &::-webkit-scrollbar{
