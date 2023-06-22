@@ -18,8 +18,8 @@ const Homepage = () => {
 
         <div className='head-2' >
        <a className='und' href="/">Home</a>
-       <a href="/register">About</a>
-       <a className='und-1' href='/'><BrightnessMediumTwoTone fontSize='80'/></a>
+       <a >About</a>
+       <a className='und-1' ><BrightnessMediumTwoTone fontSize='80'/></a>
         
         </div>
        </header>
