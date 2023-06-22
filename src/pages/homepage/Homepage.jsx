@@ -12,13 +12,13 @@ const Homepage = () => {
     <div className='homepage-0'>
        <header className='head-1 heading ' >
         <Link style={{textDecoration:'none'}}>
-        <h1  >Farmers App</h1>
+        <h1  >Farmers App.</h1>
         </Link>
         
 
         <div className='head-2' >
        <a className='und' href="/">Home</a>
-       <a href='/'>About</a>
+       <a href='/'>Abouts</a>
        <a className='und-1' ><BrightnessMediumTwoTone fontSize='80'/></a>
         
         </div>
