@@ -18,7 +18,7 @@ const Homepage = () => {
 
         <div className='head-2' >
        <a className='und' href="/">Home</a>
-       <a href='/'>Abouts</a>
+       <a href='/'>About</a>
        <a className='und-1' ><BrightnessMediumTwoTone fontSize='80'/></a>
         
         </div>
@@ -32,8 +32,8 @@ const Homepage = () => {
           <p >
           Farm Management App is a world wide website helpful to every farmer wanting to 
           record,trade,manage,control and analyse his/her farm.Each Farmer has ability
-          to change to create an account and start controlling your farm.Connect with diffrent 
-          farmers to share ideas and acqure knowledge.
+          to change and create an account and start controlling your farm.Connect with diffrent 
+          farmers to share ideas and acquire knowledge.
           Use the buttons below to sign in or sign up Farm App.
           </p> 
            <div className='btn-box'>
